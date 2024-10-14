@@ -2,38 +2,44 @@ package puppy.code;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Paddle {
-    private int x = 20;
-    private int y = 20;
-    private int width = 100;
-    private int height = 10;
-    
-    public Paddle(int x, int y, int ancho, int alto) {
-    	this.x = x;
-    	this.y= y;
-    	width = ancho;
-    	height = alto;
+public class Paddle extends GameObject {
+    private float previaPosX;
+
+    public Paddle(int x, int y, int ancho, int alto, String nombreTextura) {
+        setPosicion(x, y);
+        setDimensiones(ancho, alto);
+        setTextura(nombreTextura);
     }
-     
-    public int getX() {return x;}
-	public int getY() {return y;}
-	public int getWidth() {return width;}
-	public int getHeight() {return height;}
 
-	public void draw(ShapeRenderer shape){
-        shape.setColor(Color.BLUE);
-        int x2 = x; //= Gdx.input.getX();
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) x2 =x-15;
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x2=x+15; 
-       // y = Gdx.graphics.getHeight() - Gdx.input.getY(); 
-        if (x2 > 0 && x2+width < Gdx.graphics.getWidth()) {
-            x = x2;
+    public boolean estaQuieto() {
+        return previaPosX == posX;
+    }
+
+    public boolean isMovingRight() {
+        return posX > previaPosX;
+    }
+
+    public boolean isMovingLeft() {
+        return posX < previaPosX;
+    }
+
+    @Override
+    public void draw(SpriteBatch batch){
+        float x2 = posX; //= Gdx.input.getX();
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) x2 = posX - 15;
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x2 = posX + 15;
+        // y = Gdx.graphics.getHeight() - Gdx.input.getY();
+        if (x2 > 0 && x2 + ancho < Gdx.graphics.getWidth()) {
+            previaPosX = posX;
+            posX = x2;
         }
-        shape.rect(x, y, width, height);
+        batch.draw(textura, posX, posY, ancho, alto);
     }
-    
-    
+
+    @Override
+    public void render(SpriteBatch batch) {
+        // TODO Auto-generated method stub
+    }
 }
