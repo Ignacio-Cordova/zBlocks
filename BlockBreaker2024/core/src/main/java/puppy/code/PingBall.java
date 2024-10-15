@@ -8,7 +8,7 @@ public class PingBall extends GameObject {
 	private float ySpeed;
 	private boolean estaQuieto;
 
-	public PingBall(float x, float y, float size, float xSpeed, float ySpeed, boolean iniciaQuieto, String nombreTextura) {
+	public PingBall(float x, float y, float size, float xSpeed, float ySpeed, boolean iniciaQuieto, String nombreTextura, String sfx) {
 		setPosicion(x, y);
 		setDimensiones(size, size);
 		setTextura(nombreTextura);

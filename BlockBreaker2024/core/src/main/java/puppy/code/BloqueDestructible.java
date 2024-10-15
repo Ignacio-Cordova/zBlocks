@@ -1,13 +1,14 @@
 package puppy.code;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public class BloqueDestructible extends Bloque {
     private Item item;
 
-    public BloqueDestructible(float x, float y, float ancho, float alto, String textura, String sfx, int durabilidad, boolean tieneItem) {
+    public BloqueDestructible(float x, float y, float ancho, float alto, String textura, int durabilidad, boolean tieneItem) {
         setPosicion(x, y);
         setDimensiones(ancho, alto);
         setTextura(textura);
-        setSfx(sfx);
         this.durabilidad = durabilidad;
         if (tieneItem)
             item = generarItem();
@@ -24,7 +25,14 @@ public class BloqueDestructible extends Bloque {
     @Override
     public void actualizarTextura() {
         if (durabilidad > 0)
-            setTextura("tierra-poder");
+            if (getTexture().toString().contains("piedra"))
+                setTextura("tierra");
+            else if(getTexture().toString().contains("piedra-poder"))
+                setTextura("tierra-poder");
+            else if (getTexture().toString().contains("rubi"))
+                setTextura("piedra");
+            else if (getTexture().toString().contains("rubi-poder"))
+                setTextura("piedra-poder");
     }
 
     private Item generarItem() {
@@ -53,5 +61,9 @@ public class BloqueDestructible extends Bloque {
 
     public Item getItem() {
         return item;
+    }
+
+    public Texture getTexture() {
+        return textura;
     }
 }
