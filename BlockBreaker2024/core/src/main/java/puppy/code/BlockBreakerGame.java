@@ -2,7 +2,6 @@ package puppy.code;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -18,8 +17,8 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	private BitmapFont font;
 	private PingBall ball;
 	private Paddle pad;
-	private List<Bloque> bloques = new ArrayList<>();
-	private List<Item> items = new ArrayList<>();
+	private ArrayList<Bloque> bloques = new ArrayList<>();
+	private ArrayList<Item> items = new ArrayList<>();
 	private int vidas;
 	private int puntaje;
 	private int nivel;
@@ -65,17 +64,18 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		gestorAudio.cargarSonido("piedra-poder", "sfx/piedra-poder.mp3");
 		gestorAudio.cargarSonido("rubi", "sfx/rubi.mp3");
 		gestorAudio.cargarSonido("rubi-poder", "sfx/rubi-poder.mp3");
+		gestorAudio.cargarSonido("pelota", "sfx/pelota.mp3");
 
-		ball = new PingBall((float) Gdx.graphics.getWidth() /2-10, 41, 10, 2.5f, 3.7f, true, "pelota");
+		ball = new PingBall((float) Gdx.graphics.getWidth() /2-10, 41, 10, 2.5f, 3.7f, true, "pelota", "pelota");
 		pad = new Paddle(Gdx.graphics.getWidth()/2 - 50,40,100,10, "barra");
 
 		vidas = 3;
 		puntaje = 0;
 		nivel = 1;
-		crearBloques(2 + nivel);
+		crearBloques(nivel);
 	}
 
-	public void crearBloques(int filas) {
+	/*public void crearBloques(int filas) {
 		bloques.clear();
 		FabricaBloques fabricaBloques = new InstanciaFabricaBloques();
 		int blockWidth = 75;
@@ -87,8 +87,154 @@ public class BlockBreakerGame extends ApplicationAdapter {
 //				bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra",
 //																1, false));
 				bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra-poder",
-						1, true));
+																1, true));
 			}
+		}
+	}
+	*/
+	public void crearBloques(int nivel) {
+		bloques.clear();
+		FabricaBloques fabricaBloques = new InstanciaFabricaBloques();
+		int blockWidth = 75;
+		int blockHeight = 25;
+		int y = Gdx.graphics.getHeight();
+		if (nivel == 1) {
+			crearNivel1(fabricaBloques, blockHeight, blockWidth, y);
+		} else if (nivel == 2) {
+			crearNivel2(fabricaBloques, blockHeight, blockWidth, y);
+		}
+		else if (nivel == 3){
+			crearNivel3(fabricaBloques, blockHeight, blockWidth, y);
+		}
+	}
+
+	public void crearNivel1(FabricaBloques fabricaBloques ,int blockHeight, int blockWidth, int y) {
+		for (int cont = 0; cont < 3; cont++) {
+			y -= blockHeight + 10;
+
+			for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
+				if (cont == 2) {
+					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra",
+							1, false));
+				} else if (x == 430 && cont == 1 || x == 90 && cont == 1) {
+					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra-poder",
+							2, true));
+				} else if (x == 175 && cont == 0) {
+					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi-poder",
+							3, true));
+				} else {
+					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra",
+							2, false));
+				}
+			}
+		}
+	}
+
+	public void crearNivel2(FabricaBloques fabricaBloques, int blockHeight, int blockWidth, int y) {
+		for (int cont = 0; cont < 5; cont++) {
+			y -= blockHeight + 10;
+
+			for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
+				if (cont == 0){
+					if (x == 345 || x == 515 || x == 685){
+						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
+					}
+					else if (x == 90 || x == 175 || x == 260 || x == 430 || x == 600){
+						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
+					}
+					else if (x == 770){
+						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
+					}
+					else {
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi-poder",
+								3, true));
+					}
+				}
+				else if (cont == 1){
+					if (x == 5 || x == 770){
+						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
+					}
+				}
+				else if (cont == 2){
+					if (x == 600 || x == 770){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra-poder", 2, true));
+					}
+					else if (x != 685){
+						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
+					}
+				}
+				else if (cont == 3){
+					if (x == 5 || x == 770){
+						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
+					}
+				}
+				else if (cont == 4){
+					if (x != 90){
+						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
+					}
+				}
+			}
+		}
+	}
+
+	public void crearNivel3(FabricaBloques fabricaBloques, int blockHeight, int blockWidth, int y){
+		for (int cont = 0; cont < 7; cont++) {
+			y -= blockHeight + 10;
+
+			for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
+				if (cont == 0 || cont == 6){
+					if (x == 345 || x == 430){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+					}
+				}
+				else if (cont == 1 || cont == 5){
+					if (x == 260 || x == 515){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+					}
+					else if (x == 345 || x == 430){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false));
+					}
+				}
+				else if (cont == 2 || cont == 4){
+					if (x == 175 || x == 600){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+					}
+					else if (x == 260 || x == 515){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false));
+					}
+					else if(x == 345 || x == 430){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi", 3, false));
+					}
+				}
+				else{
+					if (x == 90 || x == 685){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+					}
+					else if (x == 175 || x == 600){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false));
+					}
+					else if (x == 260 || x == 515){
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi", 3, false));
+					}
+					else if (x == 345 || x == 430){
+						// bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "obsidiana", 3, true));
+					}
+				}
+			}
+		}
+	}
+
+	public void crearBloqueAleatorio(FabricaBloques fabricaBloques, int blockWidth, int blockHeight, int x, int y) {
+		int random = (int) (Math.random() * 100); // Genera un número entre 0 y 99
+		if (random < 70) {
+			// 70% de probabilidad para piedra
+			bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false));
+		} else if (random < 95) {
+			// 25% de probabilidad para tierra (70 a 94)
+			bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+		} else {
+			// 5% de probabilidad para rubí (95 a 99)
+			bloques.add(fabricaBloques.crearBloqueIndestructible(x, y, blockWidth, blockHeight, "rubi"));
 		}
 	}
 
@@ -126,7 +272,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			vidas--;
 			//nivel = 1;
 			ball = new PingBall(pad.getPosX()+pad.getAncho()/2 - 5, pad.getPosY() + pad.getAlto() + 11, 10,
-					2.5f, 3.7f, true, "pelota");
+					2.5f, 3.7f, true, "pelota", "pelota");
 		}
 
 		gestorColisiones.checkBallBlockCollisions(ball, bloques);
@@ -138,7 +284,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			items.clear();
 			vidas = 3;
 			nivel = 1;
-			crearBloques(2+nivel);
+			crearBloques(nivel);
 			//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
 		}
 
@@ -147,9 +293,9 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			nivel++;
 			items.clear();
 			if (vidas < 3) vidas++;
-			crearBloques(2+nivel);
+			crearBloques(nivel);
 			ball = new PingBall(pad.getPosX() + pad.getAncho()/2 - 5, pad.getPosY() + pad.getAlto() + 11,
-					10, 2.5f, 3.7f, true, "pelota");
+					10, 2.5f, 3.7f, true, "pelota", "pelota");
 		}
 
 		//dibujar bloques
