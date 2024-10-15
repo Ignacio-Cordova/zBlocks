@@ -9,6 +9,7 @@ sfx/rubi-poder.mp3
 sfx/rubi.mp3
 sfx/tierra-poder.mp3
 sfx/tierra.mp3
+sfx/vida-perdida.mp3
 texturas/amplio.png
 texturas/angosto.png
 texturas/barra.png

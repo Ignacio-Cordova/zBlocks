@@ -25,14 +25,14 @@ public class BloqueDestructible extends Bloque {
     @Override
     public void actualizarTextura() {
         if (durabilidad > 0)
-            if (getTexture().toString().contains("piedra"))
-                setTextura("tierra");
-            else if(getTexture().toString().contains("piedra-poder"))
+            if (getTexture().toString().contains("piedra-poder"))
                 setTextura("tierra-poder");
-            else if (getTexture().toString().contains("rubi"))
-                setTextura("piedra");
+            else if(getTexture().toString().contains("piedra"))
+                setTextura("tierra");
             else if (getTexture().toString().contains("rubi-poder"))
                 setTextura("piedra-poder");
+            else if (getTexture().toString().contains("rubi"))
+                setTextura("piedra");
     }
 
     private Item generarItem() {

@@ -65,6 +65,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		gestorAudio.cargarSonido("rubi", "sfx/rubi.mp3");
 		gestorAudio.cargarSonido("rubi-poder", "sfx/rubi-poder.mp3");
 		gestorAudio.cargarSonido("pelota", "sfx/pelota.mp3");
+		gestorAudio.cargarSonido("vida-perdida", "sfx/vida-perdida.mp3");
 
 		ball = new PingBall((float) Gdx.graphics.getWidth() /2-10, 41, 10, 2.5f, 3.7f, true, "pelota", "pelota");
 		pad = new Paddle(Gdx.graphics.getWidth()/2 - 50,40,100,10, "barra");
@@ -270,6 +271,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		//verificar si se fue la bola x abajo
 		if (ball.getPosY() <= 0) {
 			vidas--;
+			GestorAudio.getInstance().reproducirSonido("vida-perdida");
 			//nivel = 1;
 			ball = new PingBall(pad.getPosX()+pad.getAncho()/2 - 5, pad.getPosY() + pad.getAlto() + 11, 10,
 					2.5f, 3.7f, true, "pelota", "pelota");
@@ -282,6 +284,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		// verificar game over
 		if (vidas <= 0) {
 			items.clear();
+			GestorAudio.getInstance().reproducirSonido("game-over");
 			vidas = 3;
 			nivel = 1;
 			crearBloques(nivel);
@@ -291,6 +294,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		// verificar si el nivel se terminó
 		if (bloques.size() == 0) {
 			nivel++;
+			GestorAudio.getInstance().reproducirSonido("level-up");
 			items.clear();
 			if (vidas < 3) vidas++;
 			crearBloques(nivel);
