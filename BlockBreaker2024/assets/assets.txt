@@ -12,6 +12,7 @@ sfx/tierra.mp3
 sfx/vida-perdida.mp3
 texturas/amplio.png
 texturas/angosto.png
+texturas/Background.png
 texturas/barra.png
 texturas/lento.png
 texturas/obsidiana.png
