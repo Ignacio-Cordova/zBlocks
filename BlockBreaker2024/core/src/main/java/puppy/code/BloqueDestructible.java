@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 public class BloqueDestructible extends Bloque {
     private Item item;
 
-    public BloqueDestructible(float x, float y, float ancho, float alto, String textura, int durabilidad, boolean tieneItem) {
+    public BloqueDestructible(float x, float y, float ancho, float alto, String textura, int durabilidad, boolean tieneItem, String sfx) {
         setPosicion(x, y);
         setDimensiones(ancho, alto);
         setTextura(textura);
+        setSfx(sfx);
         this.durabilidad = durabilidad;
         if (tieneItem)
             item = generarItem();
@@ -18,21 +19,29 @@ public class BloqueDestructible extends Bloque {
     public void reducirDurabilidad() {
         if (durabilidad > 0) {
             durabilidad--;
-            GestorAudio.getInstance().reproducirSonido("tierra-poder");
+            GestorAudio.getInstance().reproducirSonido(sfx);
         }
     }
 
     @Override
     public void actualizarTextura() {
         if (durabilidad > 0)
-            if (getTexture().toString().contains("piedra-poder"))
+            if (getTexture().toString().contains("piedra-poder")) {
                 setTextura("tierra-poder");
-            else if(getTexture().toString().contains("piedra"))
+                setSfx("tierra");
+            }
+            else if(getTexture().toString().contains("piedra")){
                 setTextura("tierra");
-            else if (getTexture().toString().contains("rubi-poder"))
+                setSfx("tierra");
+            }
+            else if (getTexture().toString().contains("rubi-poder")) {
                 setTextura("piedra-poder");
-            else if (getTexture().toString().contains("rubi"))
+                setSfx("piedra");
+            }
+            else if (getTexture().toString().contains("rubi")) {
                 setTextura("piedra");
+                setSfx("piedra");
+            }
     }
 
     private Item generarItem() {

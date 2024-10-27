@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -43,11 +44,13 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		gestorTexturas.cargarTextura("piedra-poder", "texturas/piedra-poder.png");
 		gestorTexturas.cargarTextura("rubi", "texturas/rubi.png");
 		gestorTexturas.cargarTextura("rubi-poder", "texturas/rubi-poder.png");
+		gestorTexturas.cargarTextura("obsidiana", "texturas/obsidiana.png");
 
 		gestorTexturas.cargarTextura("angosto", "texturas/angosto.png");
 		gestorTexturas.cargarTextura("amplio", "texturas/amplio.png");
 		gestorTexturas.cargarTextura("lento", "texturas/lento.png");
 		gestorTexturas.cargarTextura("veloz", "texturas/veloz.png");
+		gestorTexturas.cargarTextura("background", "texturas/background.png");
 
 
 		GestorAudio gestorAudio = GestorAudio.getInstance();
@@ -66,6 +69,9 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		gestorAudio.cargarSonido("rubi-poder", "sfx/rubi-poder.mp3");
 		gestorAudio.cargarSonido("pelota", "sfx/pelota.mp3");
 		gestorAudio.cargarSonido("vida-perdida", "sfx/vida-perdida.mp3");
+
+		//Genera el fondo
+
 
 		ball = new PingBall((float) Gdx.graphics.getWidth() /2-10, 41, 10, 2.5f, 3.7f, true, "pelota", "pelota");
 		pad = new Paddle(Gdx.graphics.getWidth()/2 - 50,40,100,10, "barra");
@@ -99,12 +105,12 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		int blockWidth = 75;
 		int blockHeight = 25;
 		int y = Gdx.graphics.getHeight();
-		if (nivel == 1) {
+		if (nivel == 1 || nivel == 4) {
 			crearNivel1(fabricaBloques, blockHeight, blockWidth, y);
-		} else if (nivel == 2) {
+		} else if (nivel == 2 || nivel == 5) {
 			crearNivel2(fabricaBloques, blockHeight, blockWidth, y);
 		}
-		else if (nivel == 3){
+		else if (nivel == 3 || nivel == 6){
 			crearNivel3(fabricaBloques, blockHeight, blockWidth, y);
 		}
 	}
@@ -116,16 +122,16 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
 				if (cont == 2) {
 					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra",
-							1, false));
+							1, false, "tierra"));
 				} else if (x == 430 && cont == 1 || x == 90 && cont == 1) {
 					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra-poder",
-							2, true));
+							2, true, "piedra"));
 				} else if (x == 175 && cont == 0) {
 					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi-poder",
-							3, true));
+							3, true, "rubi"));
 				} else {
 					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra",
-							2, false));
+							2, false, "piedra"));
 				}
 			}
 		}
@@ -148,7 +154,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 					}
 					else {
 						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi-poder",
-								3, true));
+								3, true, "rubi"));
 					}
 				}
 				else if (cont == 1){
@@ -158,7 +164,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 				}
 				else if (cont == 2){
 					if (x == 600 || x == 770){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra-poder", 2, true));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra-poder", 2, true, "piedra"));
 					}
 					else if (x != 685){
 						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
@@ -185,40 +191,40 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
 				if (cont == 0 || cont == 6){
 					if (x == 345 || x == 430){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false, "tierra"));
 					}
 				}
 				else if (cont == 1 || cont == 5){
 					if (x == 260 || x == 515){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false, "tierra"));
 					}
 					else if (x == 345 || x == 430){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false, "piedra"));
 					}
 				}
 				else if (cont == 2 || cont == 4){
 					if (x == 175 || x == 600){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false, "tierra"));
 					}
 					else if (x == 260 || x == 515){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false, "piedra"));
 					}
 					else if(x == 345 || x == 430){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi", 3, false));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi", 3, false, "rubi"));
 					}
 				}
 				else{
 					if (x == 90 || x == 685){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false, "tierra"));
 					}
 					else if (x == 175 || x == 600){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false, "piedra"));
 					}
 					else if (x == 260 || x == 515){
-						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi", 3, false));
+						bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi", 3, false, "rubi"));
 					}
 					else if (x == 345 || x == 430){
-						// bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "obsidiana", 3, true));
+						bloques.add(fabricaBloques.crearBloqueIndestructible(x, y, blockWidth, blockHeight, "obsidiana"));
 					}
 				}
 			}
@@ -229,13 +235,13 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		int random = (int) (Math.random() * 100); // Genera un número entre 0 y 99
 		if (random < 70) {
 			// 70% de probabilidad para piedra
-			bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false));
+			bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra", 2, false, "piedra"));
 		} else if (random < 95) {
 			// 25% de probabilidad para tierra (70 a 94)
-			bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false));
+			bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra", 1, false, "tierra"));
 		} else {
 			// 5% de probabilidad para rubí (95 a 99)
-			bloques.add(fabricaBloques.crearBloqueIndestructible(x, y, blockWidth, blockHeight, "rubi"));
+			bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "rubi", 1, false, "rubi"));
 		}
 	}
 
@@ -252,6 +258,15 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		batch.end();
 	}
 
+	public boolean soloIndestructibles(ArrayList<Bloque> bloques){
+		for (Bloque b : bloques){
+			if (b instanceof BloqueDestructible){
+				return false;
+			}
+		}
+		return true;
+	}
+
 	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -259,6 +274,9 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		GestorColisiones gestorColisiones = GestorColisiones.getInstance();
 
 		batch.begin();
+
+		Texture fondo = GestorTexturas.getInstance().getTextura("background");
+		batch.draw(fondo, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		pad.draw(batch);
 
@@ -292,7 +310,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		}
 
 		// verificar si el nivel se terminó
-		if (bloques.size() == 0) {
+		if (bloques.size() == 0 || soloIndestructibles(bloques)) {
 			nivel++;
 			GestorAudio.getInstance().reproducirSonido("level-up");
 			items.clear();
