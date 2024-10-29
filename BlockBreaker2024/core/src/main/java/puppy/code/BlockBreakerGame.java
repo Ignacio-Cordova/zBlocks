@@ -77,7 +77,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		ball = new PingBall((float) Gdx.graphics.getWidth() /2-10, 41, 10, 2.5f, 3.7f, true, "pelota", "pelota");
 		pad = new Paddle(Gdx.graphics.getWidth()/2 - 50,40,100,10, "barra");
 
-		vidas = 100;
+		vidas = 3;
 		puntaje = 0;
 		nivel = 1;
 		crearBloques(nivel);
@@ -123,7 +123,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
 				if (cont == 2) {
 					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra",
-							1, true, "tierra"));
+							1, false, "tierra"));
 				} else if (x == 430 && cont == 1 || x == 90 && cont == 1) {
 					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra-poder",
 							2, true, "piedra"));
