@@ -38,6 +38,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 
 		gestorTexturas.cargarTextura("pelota", "texturas/pelota.png");
 		gestorTexturas.cargarTextura("barra", "texturas/barra.png");
+		gestorTexturas.cargarTextura("barraLarga", "texturas/LargePaddle.png");
 		gestorTexturas.cargarTextura("tierra", "texturas/tierra.png");
 		gestorTexturas.cargarTextura("tierra-poder", "texturas/tierra-poder.png");
 		gestorTexturas.cargarTextura("piedra", "texturas/piedra.png");
@@ -76,7 +77,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		ball = new PingBall((float) Gdx.graphics.getWidth() /2-10, 41, 10, 2.5f, 3.7f, true, "pelota", "pelota");
 		pad = new Paddle(Gdx.graphics.getWidth()/2 - 50,40,100,10, "barra");
 
-		vidas = 3;
+		vidas = 100;
 		puntaje = 0;
 		nivel = 1;
 		crearBloques(nivel);
@@ -122,7 +123,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
 				if (cont == 2) {
 					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "tierra",
-							1, false, "tierra"));
+							1, true, "tierra"));
 				} else if (x == 430 && cont == 1 || x == 90 && cont == 1) {
 					bloques.add(fabricaBloques.crearBloqueDestructible(x, y, blockWidth, blockHeight, "piedra-poder",
 							2, true, "piedra"));

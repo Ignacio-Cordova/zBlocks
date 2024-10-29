@@ -14,6 +14,7 @@ texturas/amplio.png
 texturas/angosto.png
 texturas/Background.png
 texturas/barra.png
+texturas/LargePaddle.png
 texturas/lento.png
 texturas/obsidiana.png
 texturas/pelota.png
