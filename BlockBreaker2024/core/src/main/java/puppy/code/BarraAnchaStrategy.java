@@ -4,8 +4,6 @@ public class BarraAnchaStrategy implements ItemStrategy {
     private final float multiplicador = 1.5f;
     private final int duracion = 6;
 
-    GestorTexturas gestorTexturas = GestorTexturas.getInstance();
-
     @Override
     public void aplicarEfecto(Paddle pad, PingBall ball) {
         if(pad.getAncho() == 150){
