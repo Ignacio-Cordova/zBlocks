@@ -14,6 +14,7 @@ public class EstadoJuego {
     private int vidas;
     private int puntaje;
     private int nivelActual;
+    private int highScore;
 
     private PingBall pelota;
     private Paddle barra;
@@ -25,6 +26,7 @@ public class EstadoJuego {
         vidas = VIDAS_INICIALES;
         puntaje = 0;
         nivelActual = 1;
+        highScore = 0;
         bloques = new ArrayList<>();
         items = new ArrayList<>();
         inicializarObjetosJuego();
@@ -110,6 +112,9 @@ public class EstadoJuego {
 
     private void manejarGameOver() {
         // TODO: Agregar pantalla de game over con puntaje obtenido, nivel máximo, etc
+        if (puntaje > highScore) {
+            highScore = puntaje;
+        }
         reiniciarJuego();
     }
 
@@ -274,6 +279,22 @@ public class EstadoJuego {
      */
     public int getVidas() {
         return vidas;
+    }
+
+    /**
+     * Obtiene el puntaje más alto del juego.
+     * @return Puntaje más alto.
+     */
+    public int getHighScore() {
+        return highScore;
+    }
+
+    /**
+     * Obtiene el nivel actual del juego.
+     * @return Nivel actual.
+     */
+    public int getNivelActual() {
+        return nivelActual;
     }
 
     /**
