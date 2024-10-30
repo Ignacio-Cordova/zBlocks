@@ -176,7 +176,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
 					}
 				}
-				else if (cont == 4){
+				else {
 					if (x != 90){
 						crearBloqueAleatorio(fabricaBloques, blockWidth, blockHeight, x, y);
 					}
