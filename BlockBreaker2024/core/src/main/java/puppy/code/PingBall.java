@@ -8,12 +8,12 @@ public class PingBall extends GameObject {
 	private float ySpeed;
 	private boolean estaQuieto;
 
-	public PingBall(float x, float y, float size, float xSpeed, float ySpeed, boolean iniciaQuieto, String nombreTextura, String sfx) {
+	public PingBall(float x, float y, float size, boolean iniciaQuieto, String nombreTextura, String sfx) {
 		setPosicion(x, y);
 		setDimensiones(size, size);
 		setTextura(nombreTextura);
-		this.xSpeed = xSpeed;
-		this.ySpeed = ySpeed;
+		this.xSpeed = 250f;
+		this.ySpeed = 250f;
 		estaQuieto = iniciaQuieto;
 	}
 
@@ -58,13 +58,22 @@ public class PingBall extends GameObject {
 
 	public void update() {
 		if (estaQuieto) return;
-		posX += xSpeed;
-		posY += ySpeed;
+
+		float delta = Gdx.graphics.getDeltaTime();
+
+		posX += xSpeed * delta;
+		posY += ySpeed * delta;
 		if (posX - ancho < 0 || posX + ancho > Gdx.graphics.getWidth()) {
 			xSpeed = -xSpeed;
+			if (posX - ancho < 0) {
+				posX = ancho;
+			} else {
+				posX = Gdx.graphics.getWidth() - ancho;
+			}
 		}
 		if (posY + alto > Gdx.graphics.getHeight()) {
 			ySpeed = -ySpeed;
+			posY = Gdx.graphics.getHeight() - alto;
 		}
 	}
 }

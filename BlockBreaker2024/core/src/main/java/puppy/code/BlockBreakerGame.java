@@ -74,7 +74,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		//Genera el fondo
 
 
-		ball = new PingBall((float) Gdx.graphics.getWidth() /2-10, 41, 10, 2.5f, 3.7f, true, "pelota", "pelota");
+		//ball = new PingBall((float) Gdx.graphics.getWidth() /2-10, 41, 10, 2.5f, 3.7f, true, "pelota", "pelota");
 		pad = new Paddle(Gdx.graphics.getWidth()/2 - 50,40,100,10, "barra");
 
 		vidas = 3;
@@ -292,8 +292,8 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			vidas--;
 			GestorAudio.getInstance().reproducirSonido("vida-perdida");
 			//nivel = 1;
-			ball = new PingBall(pad.getPosX()+pad.getAncho()/2 - 5, pad.getPosY() + pad.getAlto() + 11, 10,
-					2.5f, 3.7f, true, "pelota", "pelota");
+			//ball = new PingBall(pad.getPosX()+pad.getAncho()/2 - 5, pad.getPosY() + pad.getAlto() + 11, 10,
+					//2.5f, 3.7f, true, "pelota", "pelota");
 		}
 
 		gestorColisiones.checkBallBlockCollisions(ball, bloques);
@@ -317,8 +317,8 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			items.clear();
 			if (vidas < 3) vidas++;
 			crearBloques(nivel);
-			ball = new PingBall(pad.getPosX() + pad.getAncho()/2 - 5, pad.getPosY() + pad.getAlto() + 11,
-					10, 2.5f, 3.7f, true, "pelota", "pelota");
+			//ball = new PingBall(pad.getPosX() + pad.getAncho()/2 - 5, pad.getPosY() + pad.getAlto() + 11,
+					//10, 2.5f, 3.7f, true, "pelota", "pelota");
 		}
 
 		//dibujar bloques

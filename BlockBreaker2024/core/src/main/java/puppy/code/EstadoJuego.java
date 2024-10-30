@@ -118,20 +118,12 @@ public class EstadoJuego {
         pelota = new PingBall(
                 barra.getPosX() + barra.getAncho() / 2 - 5,
                 barra.getPosY() + barra.getAlto() + 11,
-                10, 2.5f, 3.7f, true,
+                10, true,
                 "pelota", "pelota");
     }
 
     private void actualizarPosicionBarra() {
-        //TODO: barra.update();
-
-        // Mantener la barra dentro de la pantalla
-        if (barra.getPosX() < 0) {
-            barra.setPosicion(0, barra.getPosY());
-        }
-        if (barra.getPosX() + barra.getAncho() > Gdx.graphics.getWidth()) {
-            barra.setPosicion(Gdx.graphics.getWidth() - barra.getAncho(), barra.getPosY());
-        }
+        barra.update();
     }
 
     private void actualizarItems() {
