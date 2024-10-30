@@ -35,7 +35,7 @@ public class EstadoJuego {
 
         reiniciarPelota();
 
-        bloques = GestorNivel.getInstance().crearNivel(nivelActual);
+        bloques = GestorNiveles.getInstance().crearNivel(nivelActual);
     }
 
     public void update() {
@@ -121,7 +121,7 @@ public class EstadoJuego {
     }
 
     private void actualizarPosicionBarra() {
-        barra.update();
+        //TODO: barra.update();
 
         // Mantener la barra dentro de la pantalla
         if (barra.getPosX() < 0) {
