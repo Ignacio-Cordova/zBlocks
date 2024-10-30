@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 
 public class EstadoJuego {
@@ -35,7 +35,7 @@ public class EstadoJuego {
 
         reiniciarPelota();
 
-        bloques = GestorNiveles.getInstance().crearNivel(nivelActual);
+        bloques = GestorNiveles.getInstance().crearNivel();
     }
 
     public void update() {
@@ -228,7 +228,7 @@ public class EstadoJuego {
     private void iniciarNivel() {
         // Inicia un nivel limpiando los items que hayan quedado y creando el nivel para los bloques
         items.clear();
-        bloques = GestorNiveles.getInstance().crearNivel(nivelActual);
+        bloques = GestorNiveles.getInstance().crearNivel();
         reiniciarPelota();
     }
 
@@ -240,5 +240,53 @@ public class EstadoJuego {
         items.clear();
         iniciarNivel();
         estado = Estado.LISTO;
+    }
+
+    /**
+     * Obtiene la barra del juego.
+     * @return Barra del juego.
+     */
+    public Paddle getBarra() {
+        return barra;
+    }
+
+    /**
+     * Obtiene la pelota del juego.
+     * @return Pelota del juego.
+     */
+    public PingBall getPelota() {
+        return pelota;
+    }
+
+    /**
+     * Obtiene el puntaje actual del juego.
+     * @return Puntaje actual.
+     */
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    /**
+     * Obtiene el nivel actual del juego.
+     * @return Nivel actual.
+     */
+    public int getVidas() {
+        return vidas;
+    }
+
+    /**
+     * Obtiene los bloques del juego en una lista inmutable.
+     * @return Lista de bloques.
+     */
+    public List<Bloque> getBloques() {
+        return Collections.unmodifiableList(bloques);
+    }
+
+    /**
+     * Obtiene los items del juego en una lista inmutable.
+     * @return Lista de items.
+     */
+    public List<Item> getItems() {
+        return Collections.unmodifiableList(items);
     }
 }
