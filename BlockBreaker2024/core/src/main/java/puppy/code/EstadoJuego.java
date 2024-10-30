@@ -36,6 +36,8 @@ public class EstadoJuego {
         reiniciarPelota();
 
         bloques = GestorNiveles.getInstance().crearNivel();
+
+        GestorAudio.getInstance().reproducirCancion("bg", true);
     }
 
     public void update() {
@@ -86,7 +88,7 @@ public class EstadoJuego {
 
     private void manejarEstadoPausado() {
         // TODO
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             estado = Estado.JUGANDO;
         }
     }
@@ -133,16 +135,20 @@ public class EstadoJuego {
     }
 
     private void actualizarItems() {
+        List<Item> itemsAEliminar = new ArrayList<>();
+
         for (Item item : items) {
             if (item.estaActivo()) {
                 item.caer();
                 if (item.getPosY() < 0) {
-                    items.remove(item);
+                    itemsAEliminar.add(item);
                 }
             } else {
-                items.remove(item);
+                itemsAEliminar.add(item);
             }
         }
+
+        items.removeAll(itemsAEliminar);
 
         // Actualiza los items usando iterador que funciona mejor con concurrencia
 //        Iterator<Item> iterador = items.iterator();
@@ -167,15 +173,19 @@ public class EstadoJuego {
     }
 
     private void actualizarBloques() {
+        List<Bloque> bloquesAEliminar = new ArrayList<>();
+
         for (Bloque bloque : bloques) {
             if (bloque.isDestroyed()) {
                 Item item = ((BloqueDestructible) bloque).getItem();
                 if (item != null)
                     items.add(item);
                 puntaje++;
-                bloques.remove(bloque);
+                bloquesAEliminar.add(bloque);
             }
         }
+
+        bloques.removeAll(bloquesAEliminar);
     }
 
     private void verificarCondiciones() {
@@ -211,7 +221,7 @@ public class EstadoJuego {
 
     private void verificarPausa() {
         // Si se presiona la tecla 'P' el estado pasa a estado pausado
-        if (Gdx.input.isKeyPressed(Input.Keys.P)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             estado = Estado.PAUSADO;
         }
     }
