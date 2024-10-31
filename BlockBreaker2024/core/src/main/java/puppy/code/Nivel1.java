@@ -21,16 +21,16 @@ public class Nivel1 extends NivelBase {
             for (int x = 5; x < Gdx.graphics.getWidth(); x += ANCHO_BLOQUE + 10) {
                 if (fila == 2) {
                     bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                            "tierra", 1, false, "tierra"));
+                                1, false));
                 } else if ((x == 430 || x == 90) && fila == 1) {
                     bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                            "piedra-poder", 2, true, "piedra"));
+                                2, true));
                 } else if (x == 175 && fila == 0) {
                     bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                            "rubi-poder", 3, true, "rubi"));
+                                3, true));
                 } else {
                     bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                            "piedra", 2, false, "piedra"));
+                                2, false));
                 }
             }
         }
