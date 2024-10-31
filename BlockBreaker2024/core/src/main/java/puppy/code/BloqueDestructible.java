@@ -1,7 +1,8 @@
 package puppy.code;
 
-import com.badlogic.gdx.graphics.Texture;
-
+/**
+ * Clase que representa un bloque destructible del juego.
+ */
 public class BloqueDestructible extends Bloque {
     private Item item;
     private int durabilidad;
@@ -69,9 +70,5 @@ public class BloqueDestructible extends Bloque {
 
     public Item getItem() {
         return item;
-    }
-
-    public Texture getTexture() {
-        return textura;
     }
 }

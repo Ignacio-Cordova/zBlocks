@@ -1,5 +1,6 @@
 package puppy.code;
 
+/**Clase encargada de crear instancias de bloques destructibles e indestructibles.***/
 public class InstanciaFabricaBloques implements FabricaBloques {
     @Override
     public BloqueDestructible crearBloqueDestructible(float posX, float posY, float ancho, float alto, int durabilidad, boolean tieneItem) {

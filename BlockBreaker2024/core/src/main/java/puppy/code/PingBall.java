@@ -3,13 +3,14 @@ package puppy.code;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/** Clase que representa la bola del juego. */
 public class PingBall extends GameObject {
 	private float xSpeed;
 	private float ySpeed;
 	private boolean estaQuieto;
 	private static final float VELOCIDAD_INICIAL = 250f;
 
-	public PingBall(float x, float y, float size, boolean iniciaQuieto, String nombreTextura, String sfx) {
+	public PingBall(float x, float y, float size, boolean iniciaQuieto, String nombreTextura) {
 		setPosicion(x, y);
 		setDimensiones(size, size);
 		setTextura(nombreTextura);
@@ -56,6 +57,7 @@ public class PingBall extends GameObject {
 		batch.draw(textura, posX - ancho, posY - alto, ancho * 2, alto * 2);
 	}
 
+	@Override
 	public void update() {
 		if (estaQuieto) return;
 

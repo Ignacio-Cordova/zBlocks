@@ -2,7 +2,7 @@ package puppy.code;
 
 import java.util.List;
 
-/*** Clase que se encarga de gestionar las colisiones en el juego. ***/
+/** Clase que se encarga de gestionar las colisiones en el juego. ***/
 public class GestorColisiones {
     private static GestorColisiones instance; // Singleton
 
@@ -15,7 +15,7 @@ public class GestorColisiones {
         return instance;
     }
 
-    /***
+    /**
      * Comprueba las colisiones entre la bola y los bloques.
      * @param ball Bola.
      * @param bloques Bloques.
@@ -30,7 +30,7 @@ public class GestorColisiones {
         }
     }
 
-    /***
+    /**
      * Comprueba la colisión entre la bola y la barra.
      * @param ball Bola.
      * @param paddle Barra.
@@ -44,7 +44,7 @@ public class GestorColisiones {
         }
     }
 
-    /***
+    /**
      * Comprueba las colisiones entre los items y la barra.
      * @param items Items.
      * @param paddle Barra.
@@ -59,6 +59,11 @@ public class GestorColisiones {
         }
     }
 
+    /**
+     * Comprueba si dos objetos del juego colisionan.
+     * @param go1 Objeto1.
+     * @param go2 Objeto2.
+     */
     private boolean collidesWith(GameObject go1, GameObject go2) {
         boolean intersectaX = go1.getPosX() - go1.getAncho() <= go2.getPosX() + go2.getAncho()
                               && go1.getPosX() + go1.getAncho() >= go2.getPosX();
@@ -67,6 +72,11 @@ public class GestorColisiones {
         return intersectaX && intersectaY;
     }
 
+    /**
+     * Realiza un rebote entre la bola y un objeto estático.
+     * @param ball Bola.
+     * @param go Objeto.
+     */
     private void reboteEstatico(PingBall ball, GameObject go) {
         if (ball.getPosY() <= go.getPosY() || ball.getPosY() >= go.getPosY() + go.getAlto())
             ball.setySpeed(-ball.getySpeed());
@@ -74,6 +84,11 @@ public class GestorColisiones {
             ball.setxSpeed(-ball.getxSpeed());
     }
 
+    /**
+     * Realiza un rebote entre la bola y la barra mientras se mueve.
+     * @param ball Bola.
+     * @param paddle Barra.
+     */
     private void reboteDinamico(PingBall ball, Paddle paddle) {
         if (paddle.isMovingLeft()) {
             ball.setxSpeed(ball.getxSpeed() - 1);

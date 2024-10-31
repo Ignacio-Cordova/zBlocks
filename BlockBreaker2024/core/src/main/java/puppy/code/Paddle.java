@@ -2,8 +2,8 @@ package puppy.code;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/** Clase que representa la barra del juego.***/
 public class Paddle extends GameObject {
     private float previaPosX;
 
@@ -13,23 +13,34 @@ public class Paddle extends GameObject {
         setTextura(nombreTextura);
     }
 
+    /**
+     * Indica si la barra está quieta.
+     * @return Verdadero si la barra está quieta, falso en caso contrario.
+     */
     public boolean estaQuieto() {
         return previaPosX == posX;
     }
 
+    /**
+     * Indica si la barra se está moviendo hacia la derecha.
+     * @return Verdadero si la barra se está moviendo hacia la derecha, falso en caso contrario.
+     */
     public boolean isMovingRight() {
         return posX > previaPosX;
     }
 
+    /**
+     * Indica si la barra se está moviendo hacia la izquierda.
+     * @return Verdadero si la barra se está moviendo hacia la izquierda, falso en caso contrario.
+     */
     public boolean isMovingLeft() {
         return posX < previaPosX;
     }
 
+    /***
+     * Actualiza la posición de la barra.
+     */
     @Override
-    public void draw(SpriteBatch batch){
-        batch.draw(textura, posX, posY, ancho, alto);
-    }
-
     public void update() {
         float delta = Gdx.graphics.getDeltaTime();
         float velocidad = 1000f;

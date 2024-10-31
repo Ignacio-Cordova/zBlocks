@@ -1,5 +1,6 @@
 package puppy.code;
 
+/** Item que hace que la pelota disminuya su velocidad. */
 public class PelotaLentaStrategy implements ItemStrategy {
     private final float multiplicador = 0.7f;
     private final int duracion = 8;

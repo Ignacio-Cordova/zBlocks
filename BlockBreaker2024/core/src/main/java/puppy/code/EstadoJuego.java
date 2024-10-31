@@ -128,7 +128,7 @@ public class EstadoJuego {
                 barra.getPosX() + barra.getAncho() / 2 - 5,
                 barra.getPosY() + barra.getAlto() + 11,
                 10, true,
-                "pelota", "pelota");
+                "pelota");
     }
 
     private void actualizarPosicionBarra() {
@@ -252,13 +252,6 @@ public class EstadoJuego {
         items.clear();
         iniciarNivel();
         estado = Estado.LISTO;
-    }
-
-    /**
-     * Obtiene el estado actual del juego.
-     */
-    public Estado getEstado() {
-        return estado;
     }
 
     /**

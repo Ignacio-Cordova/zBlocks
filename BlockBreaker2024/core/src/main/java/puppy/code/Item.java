@@ -1,8 +1,8 @@
 package puppy.code;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/** Clase que representa un item del juego. */
 public class Item extends GameObject {
     private final ItemStrategy strategy;
     private float tiempoActivo;
@@ -15,16 +15,29 @@ public class Item extends GameObject {
         this.tiempoActivo = 0;
     }
 
+    /**
+     * Hace que el item aparezca en la posición indicada.
+     * @param x Posición en el eje x.
+     * @param y Posición en el eje y.
+     */
     public void aparecer(float x, float y) {
         setPosicion(x, y);
         setDimensiones(50, 22);
         setActivo(true);
     }
 
+    /**
+     * Actualiza el estado del item.
+     * @param activo
+     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
+    /**
+     * Actualiza la posición del item.
+     */
+    @Override
     public void update() {
         float velocidad = 1f;
         posY -= velocidad;
@@ -33,12 +46,22 @@ public class Item extends GameObject {
         }
     }
 
+    /**
+     * Aplica el efecto del item a la barra o la bola.
+     * @param pad Barra.
+     * @param ball Bola.
+     */
     public void activar(Paddle pad, PingBall ball) {
         strategy.aplicarEfecto(pad, ball);
         efectoActivo = true;
         tiempoActivo = 0;
     }
 
+    /**
+     * Desactiva el efecto del item.
+     * @param pad Barra.
+     * @param ball Bola.
+     */
     public void desactivar(Paddle pad, PingBall ball) {
         if (efectoActivo) {
             strategy.revertirEfecto(pad, ball);
@@ -46,6 +69,11 @@ public class Item extends GameObject {
         }
     }
 
+    /**
+     * Actualiza el temporizador del efecto.
+     * @param pad Barra.
+     * @param ball Bola.
+     */
     public void actualizarTemporizador(Paddle pad, PingBall ball) {
         if (efectoActivo) {
             tiempoActivo += Gdx.graphics.getDeltaTime();
@@ -55,16 +83,19 @@ public class Item extends GameObject {
         }
     }
 
+    /**
+     * Verifica si el efecto del item está activo.
+     * @return Si el efecto del item está activo.
+     */
     public boolean isEfectoActivo() {
         return efectoActivo;
     }
 
+    /**
+     * Verifica si el item está activo.
+     * @return Si el item está activo.
+     */
     public boolean estaActivo() {
         return activo;
-    }
-
-    @Override
-    public void draw(SpriteBatch batch) {
-        batch.draw(textura, posX, posY, ancho, alto);
     }
 }

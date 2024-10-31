@@ -1,6 +1,5 @@
 package puppy.code;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -47,5 +46,6 @@ public abstract class GameObject {
         sfx = nombreSfx;
     }
 
-    public abstract void draw(SpriteBatch batch);
+    public void draw(SpriteBatch batch) { batch.draw(textura, posX, posY, ancho, alto); }
+    public void update() {}
 }

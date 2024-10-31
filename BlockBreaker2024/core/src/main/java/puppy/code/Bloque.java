@@ -1,8 +1,10 @@
 package puppy.code;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+/** Clase abstracta que representa un bloque del juego.***/
 public abstract class Bloque extends GameObject {
+    /**
+     * Actualiza el estado del bloque tras ser golpeado por la pelota.
+     */
     public final void actualizarBloque() {
         reducirDurabilidad();
         actualizarTextura();
@@ -11,11 +13,5 @@ public abstract class Bloque extends GameObject {
     abstract void reducirDurabilidad();
     abstract void actualizarTextura();
     abstract boolean esDestructible();
-
-    @Override
-    public void draw(SpriteBatch batch) {
-        batch.draw(textura, posX, posY, ancho, alto);
-    }
-
     public abstract boolean isDestroyed();
 }

@@ -1,5 +1,8 @@
 package puppy.code;
 
+/**
+ * Item que hace que la barra del jugador se vuelva más delgada.
+ */
 public class BarraDelgadaStrategy implements ItemStrategy {
     private final float multiplicador = 0.5f;
     private final int duracion = 6;

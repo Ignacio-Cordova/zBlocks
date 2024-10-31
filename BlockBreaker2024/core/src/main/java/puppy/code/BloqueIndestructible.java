@@ -1,5 +1,8 @@
 package puppy.code;
 
+/**
+ * Clase que representa un bloque indestructible del juego.
+ */
 public class BloqueIndestructible extends Bloque {
     public BloqueIndestructible(float x, float y, float ancho, float alto, String textura, String sfx) {
         setPosicion(x, y);
@@ -10,7 +13,7 @@ public class BloqueIndestructible extends Bloque {
 
     @Override
     public void reducirDurabilidad() {
-        GestorAudio.getInstance().reproducirSonido("indesctructible");
+        GestorAudio.getInstance().reproducirSonido("indestructible");
     }
 
     @Override

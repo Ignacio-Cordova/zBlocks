@@ -73,6 +73,8 @@ public class MainJuego extends ApplicationAdapter {
      */
     @Override
     public void dispose() {
+        GestorTexturas.getInstance().dispose();
+        GestorAudio.getInstance().dispose();
         renderizador.dispose();
     }
 }
