@@ -102,6 +102,10 @@ public class EstadoJuego {
             vidas++;
         }
 
+        for (Item item : items) {
+            item.desactivar(barra, pelota);
+        }
+
         // Reproducimos el sonido
         GestorAudio.getInstance().reproducirSonido("level-up");
 

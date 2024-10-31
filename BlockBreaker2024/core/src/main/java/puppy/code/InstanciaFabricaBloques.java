@@ -4,7 +4,7 @@ public class InstanciaFabricaBloques implements FabricaBloques {
     @Override
     public BloqueDestructible crearBloqueDestructible(float posX, float posY, float ancho, float alto, String texture,
                                                       int durabilidad, boolean tieneItem, String sfx) {
-        return new BloqueDestructible(posX, posY, ancho, alto, texture, durabilidad, tieneItem, sfx);
+        return new BloqueDestructible(posX, posY, ancho, alto, durabilidad, tieneItem);
     }
 
     @Override

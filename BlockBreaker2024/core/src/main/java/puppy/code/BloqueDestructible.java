@@ -6,14 +6,17 @@ public class BloqueDestructible extends Bloque {
     private Item item;
     private int durabilidad;
 
-    public BloqueDestructible(float x, float y, float ancho, float alto, String textura, int durabilidad, boolean tieneItem, String sfx) {
+    public BloqueDestructible(float x, float y, float ancho, float alto, int durabilidad, boolean tieneItem) {
         setPosicion(x, y);
         setDimensiones(ancho, alto);
-        setTextura(textura);
-        setSfx(sfx);
         this.durabilidad = durabilidad;
-        if (tieneItem)
+        String key = "bloque-" + durabilidad;
+        if (tieneItem) {
             item = generarItem();
+            key += "-item";
+        }
+        setTextura(key);
+        setSfx(key);
     }
 
     @Override
@@ -26,23 +29,13 @@ public class BloqueDestructible extends Bloque {
 
     @Override
     public void actualizarTextura() {
-        if (durabilidad > 0)
-            if (getTexture().toString().contains("piedra-poder")) {
-                setTextura("tierra-poder");
-                setSfx("tierra");
-            }
-            else if(getTexture().toString().contains("piedra")){
-                setTextura("tierra");
-                setSfx("tierra");
-            }
-            else if (getTexture().toString().contains("rubi-poder")) {
-                setTextura("piedra-poder");
-                setSfx("piedra");
-            }
-            else if (getTexture().toString().contains("rubi")) {
-                setTextura("piedra");
-                setSfx("piedra");
-            }
+        if (durabilidad > 0) {
+            String key = "bloque-" + durabilidad;
+            if (item != null)
+                key += "-item";
+            setTextura(key);
+            setSfx(key);
+        }
     }
 
     private Item generarItem() {
