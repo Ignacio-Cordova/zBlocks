@@ -19,6 +19,11 @@ public class BloqueIndestructible extends Bloque {
     }
 
     @Override
+    public boolean esDestructible() {
+        return false;
+    }
+
+    @Override
     public boolean isDestroyed() {
         return false;
     }

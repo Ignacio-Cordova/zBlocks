@@ -22,7 +22,7 @@ public class MainJuego extends ApplicationAdapter {
     /**
      * Método que carga los assets del juego.
      */
-    public void cargarAssets() {
+    private void cargarAssets() {
         GestorTexturas gestorTexturas = GestorTexturas.getInstance();
 
         gestorTexturas.cargarTextura("pelota", "texturas/pelota.png");

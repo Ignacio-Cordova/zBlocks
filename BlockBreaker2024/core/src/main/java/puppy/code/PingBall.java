@@ -13,8 +13,7 @@ public class PingBall extends GameObject {
 		setPosicion(x, y);
 		setDimensiones(size, size);
 		setTextura(nombreTextura);
-		this.xSpeed = VELOCIDAD_INICIAL;
-		this.ySpeed = VELOCIDAD_INICIAL;
+		velocidadInicial();
 		estaQuieto = iniciaQuieto;
 	}
 

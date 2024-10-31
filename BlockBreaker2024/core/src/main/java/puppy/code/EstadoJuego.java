@@ -140,17 +140,23 @@ public class EstadoJuego {
 
         for (Item item : items) {
             if (item.estaActivo()) {
+                // El item está cayendo
                 item.update();
                 if (item.getPosY() <= 0) {
+                    // El item se salió de la pantalla
                     itemsAEliminar.add(item);
                 }
-            } else if (!item.isEfectoActivo()) {
-                itemsAEliminar.add(item);
+            } else {
+                // El item fue recogido o no está activo
+                if (item.isEfectoActivo()) {
+                    // El efecto está activo
+                    item.actualizarTemporizador(barra, pelota);
+                }
+                // Solo eliminar si no está activo Y no tiene efecto activo
+                if (!item.estaActivo() && !item.isEfectoActivo()) {
+                    itemsAEliminar.add(item);
+                }
             }
-            else {
-                itemsAEliminar.add(item);
-            }
-            item.actualizarTemporizador(barra, pelota);
         }
 
         items.removeAll(itemsAEliminar);
@@ -224,7 +230,7 @@ public class EstadoJuego {
 
     private boolean soloQuedanBloquesIndestructibles() {
         for (Bloque bloque : bloques) {
-            if (bloque instanceof BloqueDestructible) {
+            if (bloque.esDestructible()) {
                 return false;
             }
         }
@@ -246,6 +252,13 @@ public class EstadoJuego {
         items.clear();
         iniciarNivel();
         estado = Estado.LISTO;
+    }
+
+    /**
+     * Obtiene el estado actual del juego.
+     */
+    public Estado getEstado() {
+        return estado;
     }
 
     /**

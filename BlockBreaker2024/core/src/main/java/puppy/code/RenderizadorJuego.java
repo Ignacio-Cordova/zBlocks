@@ -66,7 +66,7 @@ public class RenderizadorJuego {
      * @param nivel Nivel actual del juego.
      * @param vidas Vidas restantes del jugador.
      */
-    public void dibujarHUD(int highScore, int puntaje, int nivel, int vidas) {
+    private void dibujarHUD(int highScore, int puntaje, int nivel, int vidas) {
         camara.update();
         batch.setProjectionMatrix(camara.combined);
         batch.begin();
