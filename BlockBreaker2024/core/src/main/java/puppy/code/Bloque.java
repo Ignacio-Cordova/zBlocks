@@ -10,6 +10,7 @@ public abstract class Bloque extends GameObject {
 
     abstract void reducirDurabilidad();
     abstract void actualizarTextura();
+    abstract boolean esDestructible();
 
     @Override
     public void draw(SpriteBatch batch) {

@@ -10,7 +10,7 @@ public class BarraAnchaStrategy implements ItemStrategy {
             return;
         }
         pad.setDimensiones(pad.getAncho() * multiplicador, pad.getAlto());
-        pad.setTextura("barraLarga");
+        pad.setTextura("barra-larga");
     }
 
     @Override

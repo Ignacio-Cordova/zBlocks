@@ -21,46 +21,46 @@ public class Nivel3 extends NivelBase {
             for (int x = 5; x < Gdx.graphics.getWidth(); x += ANCHO_BLOQUE + 10) {
                 if (fila == 0 || fila == 6) {
                     if (x == 345 || x == 430) {
-                        bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                                "tierra", 1, false, "tierra"));
+                        bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE, 
+                                    1, false));
                     }
                 }
                 else if (fila == 1 || fila == 5) {
                     if (x == 260 || x == 515) {
-                        bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                                "tierra", 1, false, "tierra"));
+                        bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE, 
+                                    1, false));
                     }
                     else if (x == 345 || x == 430) {
                         bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                                "piedra", 2, false, "piedra"));
+                                 2, false));
                     }
                 }
                 else if (fila == 2 || fila == 4) {
                     if (x == 175 || x == 600) {
                         bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                                "tierra", 1, false, "tierra"));
+                                    1, false));
                     }
                     else if (x == 260 || x == 515) {
                         bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                                "piedra", 2, false, "piedra"));
+                                    2, false));
                     }
                     else if (x == 345 || x == 430) {
                         bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                                "rubi", 3, false, "rubi"));
+                                    3, false));
                     }
                 }
                 else {
                     if (x == 90 || x == 685) {
                         bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                                "tierra", 1, false, "tierra"));
+                                    1, false));
                     }
                     else if (x == 175 || x == 600) {
                         bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                                "piedra", 2, false, "piedra"));
+                                    2, false));
                     }
                     else if (x == 260 || x == 515) {
                         bloques.add(fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                                "rubi", 3, false, "rubi"));
+                                    3, false));
                     }
                     else if (x == 345 || x == 430) {
                         bloques.add(fabricaBloques.crearBloqueIndestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,

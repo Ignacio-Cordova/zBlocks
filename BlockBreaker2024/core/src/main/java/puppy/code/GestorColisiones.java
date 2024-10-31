@@ -25,6 +25,7 @@ public class GestorColisiones {
             if (collidesWith(ball, bloque)){
                 reboteEstatico(ball, bloque);
                 bloque.actualizarBloque();
+                return;
             }
         }
     }
@@ -60,17 +61,17 @@ public class GestorColisiones {
 
     private boolean collidesWith(GameObject go1, GameObject go2) {
         boolean intersectaX = go1.getPosX() - go1.getAncho() <= go2.getPosX() + go2.getAncho()
-                && go1.getPosX() + go1.getAncho() >= go2.getPosX();
+                              && go1.getPosX() + go1.getAncho() >= go2.getPosX();
         boolean intersectaY = go1.getPosY() - go1.getAlto() < go2.getPosY() + go2.getAlto()
-                && go1.getPosY() + go1.getAlto() > go2.getPosY();
+                              && go1.getPosY() + go1.getAlto() > go2.getPosY();
         return intersectaX && intersectaY;
     }
 
     private void reboteEstatico(PingBall ball, GameObject go) {
-        if (ball.posX <= go.getPosX() || ball.posX >= go.getPosX() + go.getAncho())
-            ball.setxSpeed(-ball.getxSpeed());
-        else if (ball.posY <= go.getPosY() || ball.posY >= go.getPosY() + go.getAlto())
+        if (ball.getPosY() <= go.getPosY() || ball.getPosY() >= go.getPosY() + go.getAlto())
             ball.setySpeed(-ball.getySpeed());
+        else if (ball.getPosX() <= go.getPosX() || ball.getPosX() >= go.getPosX() + go.getAncho())
+            ball.setxSpeed(-ball.getxSpeed());
     }
 
     private void reboteDinamico(PingBall ball, Paddle paddle) {

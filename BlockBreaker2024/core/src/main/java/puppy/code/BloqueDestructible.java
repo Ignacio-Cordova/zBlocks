@@ -38,6 +38,11 @@ public class BloqueDestructible extends Bloque {
         }
     }
 
+    @Override
+    public boolean esDestructible() {
+        return true;
+    }
+
     private Item generarItem() {
         int random = (int) (Math.random() * 4);
         switch (random) {

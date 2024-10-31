@@ -38,14 +38,11 @@ public abstract class NivelBase implements PlantillaNivel {
     protected Bloque crearBloqueAleatorio(int x, int y, boolean tieneItem) {
         int numero = random.nextInt(100);
         if (numero < 70) {
-            return fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                    "tierra", 1, tieneItem, "tierra");
+            return fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE, 1, tieneItem);
         } else if (numero < 90) {
-            return fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                    "piedra", 2, tieneItem, "piedra");
+            return fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE, 2, tieneItem);
         } else {
-            return fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE,
-                    "rubi", 3, tieneItem, "rubi");
+            return fabricaBloques.crearBloqueDestructible(x, y, ANCHO_BLOQUE, ALTO_BLOQUE, 3, tieneItem);
         }
     }
 }
