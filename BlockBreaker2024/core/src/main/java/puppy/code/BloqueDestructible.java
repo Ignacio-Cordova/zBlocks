@@ -21,7 +21,7 @@ public class BloqueDestructible extends Bloque {
     }
 
     @Override
-    public void reducirDurabilidad() {
+    protected void reducirDurabilidad() {
         if (durabilidad > 0) {
             durabilidad--;
             GestorAudio.getInstance().reproducirSonido(sfx);
@@ -29,7 +29,7 @@ public class BloqueDestructible extends Bloque {
     }
 
     @Override
-    public void actualizarTextura() {
+    protected void actualizarTextura() {
         if (durabilidad > 0) {
             String key = "bloque-" + durabilidad;
             if (item != null)

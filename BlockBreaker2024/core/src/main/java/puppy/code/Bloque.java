@@ -10,8 +10,8 @@ public abstract class Bloque extends GameObject {
         actualizarTextura();
     }
 
-    abstract void reducirDurabilidad();
-    abstract void actualizarTextura();
-    abstract boolean esDestructible();
+    protected abstract void reducirDurabilidad();
+    protected abstract void actualizarTextura();
+    public abstract boolean esDestructible();
     public abstract boolean isDestroyed();
 }

@@ -12,12 +12,12 @@ public class BloqueIndestructible extends Bloque {
     }
 
     @Override
-    public void reducirDurabilidad() {
+    protected void reducirDurabilidad() {
         GestorAudio.getInstance().reproducirSonido("indestructible");
     }
 
     @Override
-    public void actualizarTextura() {
+    protected void actualizarTextura() {
         // No tiene efecto
     }
 
