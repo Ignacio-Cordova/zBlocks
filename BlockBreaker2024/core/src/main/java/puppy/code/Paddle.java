@@ -30,11 +30,6 @@ public class Paddle extends GameObject {
         batch.draw(textura, posX, posY, ancho, alto);
     }
 
-    @Override
-    public void render(SpriteBatch batch) {
-        // TODO Auto-generated method stub
-    }
-
     public void update() {
         float delta = Gdx.graphics.getDeltaTime();
         float velocidad = 1000f;

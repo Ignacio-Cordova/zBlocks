@@ -48,5 +48,4 @@ public abstract class GameObject {
     }
 
     public abstract void draw(SpriteBatch batch);
-    public abstract void render(SpriteBatch batch);
 }

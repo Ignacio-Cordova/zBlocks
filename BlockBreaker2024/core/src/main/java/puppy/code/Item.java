@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Item extends GameObject {
     private final ItemStrategy strategy;
-    private float velocidadCaida = 1f;
     private float tiempoActivo;
+    private boolean efectoActivo = false;
     private boolean activo = false;
 
     public Item(ItemStrategy strategy, String textura) {
@@ -25,8 +25,9 @@ public class Item extends GameObject {
         this.activo = activo;
     }
 
-    public void caer() {
-        posY -= velocidadCaida;
+    public void update() {
+        float velocidad = 1f;
+        posY -= velocidad;
         if (posY <= 0) {
             setActivo(false);
         }
@@ -34,14 +35,28 @@ public class Item extends GameObject {
 
     public void activar(Paddle pad, PingBall ball) {
         strategy.aplicarEfecto(pad, ball);
-        temporizador(pad, ball);
+        efectoActivo = true;
+        tiempoActivo = 0;
     }
 
-    public void temporizador(Paddle pad, PingBall ball) {
-        tiempoActivo += Gdx.graphics.getDeltaTime();
-        if (tiempoActivo >= strategy.getDuracion()) {
+    public void desactivar(Paddle pad, PingBall ball) {
+        if (efectoActivo) {
             strategy.revertirEfecto(pad, ball);
+            efectoActivo = false;
         }
+    }
+
+    public void actualizarTemporizador(Paddle pad, PingBall ball) {
+        if (efectoActivo) {
+            tiempoActivo += Gdx.graphics.getDeltaTime();
+            if (tiempoActivo >= strategy.getDuracion()) {
+                desactivar(pad, ball);
+            }
+        }
+    }
+
+    public boolean isEfectoActivo() {
+        return efectoActivo;
     }
 
     public boolean estaActivo() {
@@ -51,10 +66,5 @@ public class Item extends GameObject {
     @Override
     public void draw(SpriteBatch batch) {
         batch.draw(textura, posX, posY, ancho, alto);
-    }
-
-    @Override
-    public void render(SpriteBatch batch) {
-        // TODO Auto-generated method stub
     }
 }

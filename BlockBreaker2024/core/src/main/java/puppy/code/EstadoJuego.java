@@ -89,7 +89,7 @@ public class EstadoJuego {
     }
 
     private void manejarEstadoPausado() {
-        // TODO
+        // TODO menú pausa
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             estado = Estado.JUGANDO;
         }
@@ -136,30 +136,20 @@ public class EstadoJuego {
 
         for (Item item : items) {
             if (item.estaActivo()) {
-                item.caer();
-                if (item.getPosY() < 0) {
+                item.update();
+                if (item.getPosY() <= 0) {
                     itemsAEliminar.add(item);
                 }
-            } else {
+            } else if (!item.isEfectoActivo()) {
                 itemsAEliminar.add(item);
             }
+            else {
+                itemsAEliminar.add(item);
+            }
+            item.actualizarTemporizador(barra, pelota);
         }
 
         items.removeAll(itemsAEliminar);
-
-        // Actualiza los items usando iterador que funciona mejor con concurrencia
-//        Iterator<Item> iterador = items.iterator();
-//        while (iterador.hasNext()) {
-//            Item item = iterador.next();
-//            if (item.estaActivo()) {
-//                item.caer();
-//                if (item.getPosY() < 0) {
-//                    iterador.remove();
-//                }
-//            } else {
-//                iterador.remove();
-//            }
-//        }
     }
 
     private void procesarColisiones() {
@@ -197,6 +187,11 @@ public class EstadoJuego {
         if (pelota.getPosY() <= 0) {
             // Si es así restamos vida y vemos si es game over para cambiar el estado del juego
             vidas--;
+
+            // Desactivamos los efectos de los ítems
+            for (Item item : items) {
+                item.desactivar(barra, pelota);
+            }
 
             if (vidas <= 0) {
                 GestorAudio.getInstance().reproducirSonido("game-over");

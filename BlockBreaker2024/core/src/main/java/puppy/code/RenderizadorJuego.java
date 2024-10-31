@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Clase que se encarga de renderizar los objetos del juego.
  */
 public class RenderizadorJuego {
-    private OrthographicCamera camara;
-    private SpriteBatch batch;
-    private BitmapFont fuente;
+    private final OrthographicCamera camara;
+    private final SpriteBatch batch;
+    private final BitmapFont fuente;
 
     /**
      * Constructor de la clase.

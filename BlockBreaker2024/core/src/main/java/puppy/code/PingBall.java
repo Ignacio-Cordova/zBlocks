@@ -7,13 +7,14 @@ public class PingBall extends GameObject {
 	private float xSpeed;
 	private float ySpeed;
 	private boolean estaQuieto;
+	private static final float VELOCIDAD_INICIAL = 250f;
 
 	public PingBall(float x, float y, float size, boolean iniciaQuieto, String nombreTextura, String sfx) {
 		setPosicion(x, y);
 		setDimensiones(size, size);
 		setTextura(nombreTextura);
-		this.xSpeed = 250f;
-		this.ySpeed = 250f;
+		this.xSpeed = VELOCIDAD_INICIAL;
+		this.ySpeed = VELOCIDAD_INICIAL;
 		estaQuieto = iniciaQuieto;
 	}
 
@@ -46,14 +47,14 @@ public class PingBall extends GameObject {
 		ySpeed *= factor;
 	}
 
-	@Override
-	public void draw(SpriteBatch batch) {
-		batch.draw(textura, posX - ancho, posY - alto, ancho * 2, alto * 2);
+	public void velocidadInicial() {
+		xSpeed = VELOCIDAD_INICIAL;
+		ySpeed = VELOCIDAD_INICIAL;
 	}
 
 	@Override
-	public void render(SpriteBatch batch) {
-		// TODO Auto-generated method stub
+	public void draw(SpriteBatch batch) {
+		batch.draw(textura, posX - ancho, posY - alto, ancho * 2, alto * 2);
 	}
 
 	public void update() {

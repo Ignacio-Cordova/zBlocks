@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class BloqueDestructible extends Bloque {
     private Item item;
+    private int durabilidad;
 
     public BloqueDestructible(float x, float y, float ancho, float alto, String textura, int durabilidad, boolean tieneItem, String sfx) {
         setPosicion(x, y);

@@ -345,7 +345,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			Item item = itemIterator.next();
 			if (item.estaActivo()) {
 				item.draw(batch);
-				item.caer();
+				item.update();
 			} else {
 				itemIterator.remove();
 			}
