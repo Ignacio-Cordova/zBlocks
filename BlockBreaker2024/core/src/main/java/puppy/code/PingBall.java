@@ -7,13 +7,14 @@ public class PingBall extends GameObject {
 	private float xSpeed;
 	private float ySpeed;
 	private boolean estaQuieto;
+	private static final float VELOCIDAD_INICIAL = 250f;
 
-	public PingBall(float x, float y, float size, float xSpeed, float ySpeed, boolean iniciaQuieto, String nombreTextura, String sfx) {
+	public PingBall(float x, float y, float size, boolean iniciaQuieto, String nombreTextura, String sfx) {
 		setPosicion(x, y);
 		setDimensiones(size, size);
 		setTextura(nombreTextura);
-		this.xSpeed = xSpeed;
-		this.ySpeed = ySpeed;
+		this.xSpeed = VELOCIDAD_INICIAL;
+		this.ySpeed = VELOCIDAD_INICIAL;
 		estaQuieto = iniciaQuieto;
 	}
 
@@ -46,25 +47,34 @@ public class PingBall extends GameObject {
 		ySpeed *= factor;
 	}
 
+	public void velocidadInicial() {
+		xSpeed = VELOCIDAD_INICIAL;
+		ySpeed = VELOCIDAD_INICIAL;
+	}
+
 	@Override
 	public void draw(SpriteBatch batch) {
 		batch.draw(textura, posX - ancho, posY - alto, ancho * 2, alto * 2);
 	}
 
-	@Override
-	public void render(SpriteBatch batch) {
-		// TODO Auto-generated method stub
-	}
-
 	public void update() {
 		if (estaQuieto) return;
-		posX += xSpeed;
-		posY += ySpeed;
+
+		float delta = Gdx.graphics.getDeltaTime();
+
+		posX += xSpeed * delta;
+		posY += ySpeed * delta;
 		if (posX - ancho < 0 || posX + ancho > Gdx.graphics.getWidth()) {
 			xSpeed = -xSpeed;
+			if (posX - ancho < 0) {
+				posX = ancho;
+			} else {
+				posX = Gdx.graphics.getWidth() - ancho;
+			}
 		}
 		if (posY + alto > Gdx.graphics.getHeight()) {
 			ySpeed = -ySpeed;
+			posY = Gdx.graphics.getHeight() - alto;
 		}
 	}
 }

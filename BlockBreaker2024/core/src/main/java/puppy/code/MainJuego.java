@@ -28,12 +28,12 @@ public class MainJuego extends ApplicationAdapter {
         gestorTexturas.cargarTextura("pelota", "texturas/pelota.png");
         gestorTexturas.cargarTextura("barra", "texturas/barra.png");
         gestorTexturas.cargarTextura("barraLarga", "texturas/LargePaddle.png");
-        gestorTexturas.cargarTextura("tierra", "texturas/tierra.png");
-        gestorTexturas.cargarTextura("tierra-poder", "texturas/tierra-poder.png");
-        gestorTexturas.cargarTextura("piedra", "texturas/piedra.png");
-        gestorTexturas.cargarTextura("piedra-poder", "texturas/piedra-poder.png");
-        gestorTexturas.cargarTextura("rubi", "texturas/rubi.png");
-        gestorTexturas.cargarTextura("rubi-poder", "texturas/rubi-poder.png");
+        gestorTexturas.cargarTextura("bloque-1", "texturas/bloque-1.png");
+        gestorTexturas.cargarTextura("bloque-1-item", "texturas/bloque-1-item.png");
+        gestorTexturas.cargarTextura("bloque-2", "texturas/bloque-2.png");
+        gestorTexturas.cargarTextura("bloque-2-item", "texturas/bloque-2-item.png");
+        gestorTexturas.cargarTextura("bloque-3", "texturas/bloque-3.png");
+        gestorTexturas.cargarTextura("bloque-3-item", "texturas/bloque-3-item.png");
         gestorTexturas.cargarTextura("obsidiana", "texturas/obsidiana.png");
 
         gestorTexturas.cargarTextura("angosto", "texturas/angosto.png");
@@ -50,12 +50,12 @@ public class MainJuego extends ApplicationAdapter {
         gestorAudio.cargarSonido("level-up", "sfx/level-up.mp3");
         gestorAudio.cargarSonido("game-over", "sfx/game-over.mp3");
         gestorAudio.cargarSonido("indestructible", "sfx/indestructible.mp3");
-        gestorAudio.cargarSonido("tierra", "sfx/tierra.mp3");
-        gestorAudio.cargarSonido("tierra-poder", "sfx/tierra-poder.mp3");
-        gestorAudio.cargarSonido("piedra", "sfx/piedra.mp3");
-        gestorAudio.cargarSonido("piedra-poder", "sfx/piedra-poder.mp3");
-        gestorAudio.cargarSonido("rubi", "sfx/rubi.mp3");
-        gestorAudio.cargarSonido("rubi-poder", "sfx/rubi-poder.mp3");
+        gestorAudio.cargarSonido("bloque-1", "sfx/bloque-1.mp3");
+        gestorAudio.cargarSonido("bloque-1", "sfx/bloque-1.mp3");
+        gestorAudio.cargarSonido("bloque-2", "sfx/bloque-2.mp3");
+        gestorAudio.cargarSonido("bloque-2-item", "sfx/bloque-2-item.mp3");
+        gestorAudio.cargarSonido("bloque-3", "sfx/bloque-3.mp3");
+        gestorAudio.cargarSonido("bloque-3-item", "sfx/bloque-3-item.mp3");
         gestorAudio.cargarSonido("pelota", "sfx/pelota.mp3");
         gestorAudio.cargarSonido("vida-perdida", "sfx/vida-perdida.mp3");
     }

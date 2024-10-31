@@ -27,19 +27,28 @@ public class Paddle extends GameObject {
 
     @Override
     public void draw(SpriteBatch batch){
-        float x2 = posX; //= Gdx.input.getX();
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) x2 = posX - 15;
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x2 = posX + 15;
-        // y = Gdx.graphics.getHeight() - Gdx.input.getY();
-        if (x2 > 0 && x2 + ancho < Gdx.graphics.getWidth()) {
-            previaPosX = posX;
-            posX = x2;
-        }
         batch.draw(textura, posX, posY, ancho, alto);
     }
 
-    @Override
-    public void render(SpriteBatch batch) {
-        // TODO Auto-generated method stub
+    public void update() {
+        float delta = Gdx.graphics.getDeltaTime();
+        float velocidad = 1000f;
+
+        previaPosX = posX;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+            posX -= velocidad * delta;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+            posX += velocidad * delta;
+        }
+
+        // Mantener la barra dentro de la pantalla
+        if (posX < 0) {
+            setPosicion(0, posY);
+        }
+        if (posX + ancho > Gdx.graphics.getWidth()) {
+            setPosicion(Gdx.graphics.getWidth() - ancho, posY);
+        }
     }
 }

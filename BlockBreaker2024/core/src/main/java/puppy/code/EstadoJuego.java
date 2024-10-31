@@ -14,6 +14,7 @@ public class EstadoJuego {
     private int vidas;
     private int puntaje;
     private int nivelActual;
+    private int highScore;
 
     private PingBall pelota;
     private Paddle barra;
@@ -25,6 +26,7 @@ public class EstadoJuego {
         vidas = VIDAS_INICIALES;
         puntaje = 0;
         nivelActual = 1;
+        highScore = 0;
         bloques = new ArrayList<>();
         items = new ArrayList<>();
         inicializarObjetosJuego();
@@ -87,7 +89,7 @@ public class EstadoJuego {
     }
 
     private void manejarEstadoPausado() {
-        // TODO
+        // TODO menú pausa
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             estado = Estado.JUGANDO;
         }
@@ -100,6 +102,10 @@ public class EstadoJuego {
             vidas++;
         }
 
+        for (Item item : items) {
+            item.desactivar(barra, pelota);
+        }
+
         // Reproducimos el sonido
         GestorAudio.getInstance().reproducirSonido("level-up");
 
@@ -110,6 +116,9 @@ public class EstadoJuego {
 
     private void manejarGameOver() {
         // TODO: Agregar pantalla de game over con puntaje obtenido, nivel máximo, etc
+        if (puntaje > highScore) {
+            highScore = puntaje;
+        }
         reiniciarJuego();
     }
 
@@ -118,20 +127,12 @@ public class EstadoJuego {
         pelota = new PingBall(
                 barra.getPosX() + barra.getAncho() / 2 - 5,
                 barra.getPosY() + barra.getAlto() + 11,
-                10, 2.5f, 3.7f, true,
+                10, true,
                 "pelota", "pelota");
     }
 
     private void actualizarPosicionBarra() {
-        //TODO: barra.update();
-
-        // Mantener la barra dentro de la pantalla
-        if (barra.getPosX() < 0) {
-            barra.setPosicion(0, barra.getPosY());
-        }
-        if (barra.getPosX() + barra.getAncho() > Gdx.graphics.getWidth()) {
-            barra.setPosicion(Gdx.graphics.getWidth() - barra.getAncho(), barra.getPosY());
-        }
+        barra.update();
     }
 
     private void actualizarItems() {
@@ -139,30 +140,20 @@ public class EstadoJuego {
 
         for (Item item : items) {
             if (item.estaActivo()) {
-                item.caer();
-                if (item.getPosY() < 0) {
+                item.update();
+                if (item.getPosY() <= 0) {
                     itemsAEliminar.add(item);
                 }
-            } else {
+            } else if (!item.isEfectoActivo()) {
                 itemsAEliminar.add(item);
             }
+            else {
+                itemsAEliminar.add(item);
+            }
+            item.actualizarTemporizador(barra, pelota);
         }
 
         items.removeAll(itemsAEliminar);
-
-        // Actualiza los items usando iterador que funciona mejor con concurrencia
-//        Iterator<Item> iterador = items.iterator();
-//        while (iterador.hasNext()) {
-//            Item item = iterador.next();
-//            if (item.estaActivo()) {
-//                item.caer();
-//                if (item.getPosY() < 0) {
-//                    iterador.remove();
-//                }
-//            } else {
-//                iterador.remove();
-//            }
-//        }
     }
 
     private void procesarColisiones() {
@@ -200,6 +191,11 @@ public class EstadoJuego {
         if (pelota.getPosY() <= 0) {
             // Si es así restamos vida y vemos si es game over para cambiar el estado del juego
             vidas--;
+
+            // Desactivamos los efectos de los ítems
+            for (Item item : items) {
+                item.desactivar(barra, pelota);
+            }
 
             if (vidas <= 0) {
                 GestorAudio.getInstance().reproducirSonido("game-over");
@@ -282,6 +278,22 @@ public class EstadoJuego {
      */
     public int getVidas() {
         return vidas;
+    }
+
+    /**
+     * Obtiene el puntaje más alto del juego.
+     * @return Puntaje más alto.
+     */
+    public int getHighScore() {
+        return highScore;
+    }
+
+    /**
+     * Obtiene el nivel actual del juego.
+     * @return Nivel actual.
+     */
+    public int getNivelActual() {
+        return nivelActual;
     }
 
     /**

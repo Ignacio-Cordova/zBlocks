@@ -11,7 +11,7 @@ public class PelotaRapidaStrategy implements ItemStrategy {
 
     @Override
     public void revertirEfecto(Paddle pad, PingBall pelota) {
-        pelota.multiplicarVelocidad(1 / multiplicador);
+        pelota.velocidadInicial();
     }
 
     @Override

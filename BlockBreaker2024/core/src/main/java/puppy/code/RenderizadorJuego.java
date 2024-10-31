@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Clase que se encarga de renderizar los objetos del juego.
  */
 public class RenderizadorJuego {
-    private OrthographicCamera camara;
-    private SpriteBatch batch;
-    private BitmapFont fuente;
+    private final OrthographicCamera camara;
+    private final SpriteBatch batch;
+    private final BitmapFont fuente;
 
     /**
      * Constructor de la clase.
@@ -56,21 +56,39 @@ public class RenderizadorJuego {
 
         batch.end();
 
-        dibujarTextos(estado.getPuntaje(), estado.getVidas());
+        dibujarHUD(estado.getHighScore(), estado.getPuntaje(), estado.getNivelActual(), estado.getVidas());
     }
 
     /**
-     * Dibuja los textos de puntaje y vidas en la pantalla.
-     * @param puntaje Puntaje del jugador.
-     * @param vidas Vidas del jugador.
+     * Dibuja los textos de puntaje, nivel y vidas en la pantalla.
+     * @param highScore High score del jugador.
+     * @param puntaje Puntaje actual del jugador.
+     * @param nivel Nivel actual del juego.
+     * @param vidas Vidas restantes del jugador.
      */
-    public void dibujarTextos(int puntaje, int vidas) {
+    public void dibujarHUD(int highScore, int puntaje, int nivel, int vidas) {
         camara.update();
         batch.setProjectionMatrix(camara.combined);
         batch.begin();
-        fuente.getData().setScale(0.5f);
-        fuente.draw(batch, "Puntos: " + puntaje, 10, 25);
-        fuente.draw(batch, "Vidas : " + vidas, Gdx.graphics.getWidth() - 180, 25);
+
+        // Escala de la fuente y posición en Y (parte inferior de la pantalla)
+        float escalaFuente = 1.5f;
+        fuente.getData().setScale(escalaFuente);
+        float yPos = 25;
+
+        // Posiciones en X para cada elemento, calculadas de acuerdo al tamaño de la pantalla
+        float espacio = 230; // Espacio entre cada elemento
+        float xHighScore = 10; // Posición inicial para el high score
+        float xPuntaje = xHighScore + espacio;
+        float xNivel = xPuntaje + espacio;
+        float xVidas = xNivel + espacio;
+
+        // Dibujar cada elemento en su posición respectiva
+        fuente.draw(batch, "Record: " + highScore, xHighScore, yPos);
+        fuente.draw(batch, "Puntaje: " + puntaje, xPuntaje, yPos);
+        fuente.draw(batch, "Nivel: " + nivel, xNivel, yPos);
+        fuente.draw(batch, "Vidas: " + vidas, xVidas, yPos);
+
         batch.end();
     }
 
