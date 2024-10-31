@@ -27,7 +27,7 @@ public class MainJuego extends ApplicationAdapter {
 
         gestorTexturas.cargarTextura("pelota", "texturas/pelota.png");
         gestorTexturas.cargarTextura("barra", "texturas/barra.png");
-        gestorTexturas.cargarTextura("barraLarga", "texturas/LargePaddle.png");
+        gestorTexturas.cargarTextura("barra-larga", "texturas/barra-larga.png");
         gestorTexturas.cargarTextura("bloque-1", "texturas/bloque-1.png");
         gestorTexturas.cargarTextura("bloque-1-item", "texturas/bloque-1-item.png");
         gestorTexturas.cargarTextura("bloque-2", "texturas/bloque-2.png");
@@ -36,10 +36,10 @@ public class MainJuego extends ApplicationAdapter {
         gestorTexturas.cargarTextura("bloque-3-item", "texturas/bloque-3-item.png");
         gestorTexturas.cargarTextura("obsidiana", "texturas/obsidiana.png");
 
-        gestorTexturas.cargarTextura("angosto", "texturas/angosto.png");
-        gestorTexturas.cargarTextura("amplio", "texturas/amplio.png");
-        gestorTexturas.cargarTextura("lento", "texturas/lento.png");
-        gestorTexturas.cargarTextura("veloz", "texturas/veloz.png");
+        gestorTexturas.cargarTextura("angosto", "texturas/item-angosto.png");
+        gestorTexturas.cargarTextura("amplio", "texturas/item-amplio.png");
+        gestorTexturas.cargarTextura("lento", "texturas/item-lento.png");
+        gestorTexturas.cargarTextura("veloz", "texturas/item-veloz.png");
         gestorTexturas.cargarTextura("background", "texturas/background.png");
 
 
@@ -56,7 +56,6 @@ public class MainJuego extends ApplicationAdapter {
         gestorAudio.cargarSonido("bloque-2-item", "sfx/bloque-2-item.mp3");
         gestorAudio.cargarSonido("bloque-3", "sfx/bloque-3.mp3");
         gestorAudio.cargarSonido("bloque-3-item", "sfx/bloque-3-item.mp3");
-        gestorAudio.cargarSonido("pelota", "sfx/pelota.mp3");
         gestorAudio.cargarSonido("vida-perdida", "sfx/vida-perdida.mp3");
     }
 
