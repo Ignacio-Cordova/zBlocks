@@ -27,7 +27,8 @@ public class EstadoJuego {
     private PingBall pelota;
     private Paddle barra;
     private List<Bloque> bloques;
-    private List<Item> items;
+    private final List<Item> items;
+    private final GestorAudio gestorAudio;
 
     public EstadoJuego() {
         estado = Estado.LISTO;
@@ -37,6 +38,7 @@ public class EstadoJuego {
         highScore = 0;
         bloques = new ArrayList<>();
         items = new ArrayList<>();
+        gestorAudio = GestorAudio.getInstance();
         inicializarObjetosJuego();
     }
 
@@ -47,7 +49,7 @@ public class EstadoJuego {
 
         bloques = GestorNiveles.getInstance().crearNivel();
 
-        GestorAudio.getInstance().reproducirCancion("bg", true);
+        gestorAudio.reproducirCancion("bg", true);
     }
 
     public void update() {
@@ -115,7 +117,7 @@ public class EstadoJuego {
         }
 
         // Reproducimos el sonido
-        GestorAudio.getInstance().reproducirSonido("level-up");
+        gestorAudio.reproducirSonido("level-up");
 
         // Iniciamos el nuevo nivel y cambiamos el estado actual del juego
         iniciarNivel();
@@ -212,10 +214,10 @@ public class EstadoJuego {
             }
 
             if (vidas <= 0) {
-                GestorAudio.getInstance().reproducirSonido("game-over");
+                gestorAudio.reproducirSonido("game-over");
                 estado = Estado.GAME_OVER;
             } else {
-                GestorAudio.getInstance().reproducirSonido("vida-perdida");
+                gestorAudio.reproducirSonido("vida-perdida");
                 reiniciarPelota();
                 estado = Estado.LISTO;
             }
