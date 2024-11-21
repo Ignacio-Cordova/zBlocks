@@ -30,6 +30,7 @@ public class EstadoJuego {
     private final List<Item> items;
     private final GestorAudio gestorAudio;
     private final GestorColisiones gestorColisiones;
+    private final GestorNiveles gestorNiveles;
 
     public EstadoJuego() {
         estado = Estado.LISTO;
@@ -41,6 +42,7 @@ public class EstadoJuego {
         items = new ArrayList<>();
         gestorAudio = GestorAudio.getInstance();
         gestorColisiones = GestorColisiones.getInstance();
+        gestorNiveles = GestorNiveles.getInstance();
         inicializarObjetosJuego();
     }
 
@@ -49,7 +51,7 @@ public class EstadoJuego {
 
         reiniciarPelota();
 
-        bloques = GestorNiveles.getInstance().crearNivel();
+        bloques = gestorNiveles.crearNivel();
 
         gestorAudio.reproducirCancion("bg", true);
     }
@@ -252,7 +254,7 @@ public class EstadoJuego {
     private void iniciarNivel() {
         // Inicia un nivel limpiando los items que hayan quedado y creando el nivel para los bloques
         items.clear();
-        bloques = GestorNiveles.getInstance().crearNivel();
+        bloques = gestorNiveles.crearNivel();
         reiniciarPelota();
     }
 
