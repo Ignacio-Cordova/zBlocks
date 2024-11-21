@@ -29,6 +29,7 @@ public class EstadoJuego {
     private List<Bloque> bloques;
     private final List<Item> items;
     private final GestorAudio gestorAudio;
+    private final GestorColisiones gestorColisiones;
 
     public EstadoJuego() {
         estado = Estado.LISTO;
@@ -39,6 +40,7 @@ public class EstadoJuego {
         bloques = new ArrayList<>();
         items = new ArrayList<>();
         gestorAudio = GestorAudio.getInstance();
+        gestorColisiones = GestorColisiones.getInstance();
         inicializarObjetosJuego();
     }
 
@@ -174,9 +176,9 @@ public class EstadoJuego {
 
     private void procesarColisiones() {
         // Procesa las distintas posibles colisiones entre entidades usando el gestor para esto mismo
-        GestorColisiones.getInstance().checkBallBlockCollisions(pelota, bloques);
-        GestorColisiones.getInstance().checkBallPaddleCollision(pelota, barra);
-        GestorColisiones.getInstance().checkItemPaddleCollision(items, barra, pelota);
+        gestorColisiones.checkBallBlockCollisions(pelota, bloques);
+        gestorColisiones.checkBallPaddleCollision(pelota, barra);
+        gestorColisiones.checkItemPaddleCollision(items, barra, pelota);
     }
 
     private void actualizarBloques() {
